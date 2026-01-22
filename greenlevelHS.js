@@ -5,5 +5,5 @@ var green_level_hs = {
 "features": [
 { "type": "Feature", "properties": { "id": 1, "descrip": "unc well" }, "geometry": { "type": "Point", "coordinates": [-78.89873632725632 , 35.77396841827961] } }
 ]
-}
+};
 
