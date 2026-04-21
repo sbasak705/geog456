@@ -189,7 +189,7 @@ button:hover {
 .legend .y1914 { border-color: #2c4a7a; }
 .legend .y1915 { border-color: #3f6b8a; }
 .legend .y1916 { border-color: #6b8e23; }
-.legend .y1917 { border-color: #a67c52; }
+.legend .y1917 { border-color: #610482be; }
 .legend .y1918 { border-color: #8b0000; }
 
 .legend .dashed {
@@ -256,7 +256,7 @@ function getYearColor(year) {
         "1914": "#2c4a7a",
         "1915": "#3f6b8a",
         "1916": "#6b8e23",
-        "1917": "#a67c52",
+        "1917": "#610482be",
         "1918": "#8b0000",
         "1915-1916": "#6b8e23"
     }[year] || "#444";
@@ -267,7 +267,7 @@ var trenchLayer = L.geoJSON(trenchlines, {
         return {
             color: getYearColor(feature.properties.Name),
             weight: 2.5,
-            opacity: 0.9,
+            opacity: 1,
             dashArray: "6,6"
         };
     }
