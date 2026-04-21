@@ -66,7 +66,7 @@ h2 {
   letter-spacing: 1px;
 }
 
-#mapid { height: 800px; width: 80%; margin: 20px auto; border-radius: 0; }
+#mapid { height: 1000px; width: 80%; margin: 20px auto; border-radius: 0; }
 
 #controls {
   text-align: center;
@@ -158,6 +158,7 @@ button:hover {
   text-align: center;
   font-weight: bold;
 }
+/* LEGEND */
 .legend {
   background: rgba(243, 230, 200, 0.95);
   padding: 12px;
@@ -171,21 +172,7 @@ button:hover {
   border-top: 3px solid;
   margin-right: 8px;
 }
-.legend .border1914 { border-color: #000000; }
-.legend .border1918 { border-color: #d80000; }
 
-.legend .label {
-  font-weight: bold;
-  margin-top: 6px;
-}
-
-.legend .allies {
-  color: #2c4a7a;
-}
-
-.legend .central {
-  color: #8b0000;
-}
 .legend .y1914 { border-color: #2c4a7a; }
 .legend .y1915 { border-color: #3f6b8a; }
 .legend .y1916 { border-color: #6b8e23; }
@@ -251,6 +238,7 @@ L.imageOverlay(
   { opacity: 0.34 }
 ).addTo(map);
 
+/* YEAR COLOR FUNCTION */
 function getYearColor(year) {
     return {
         "1914": "#2c4a7a",
@@ -262,6 +250,7 @@ function getYearColor(year) {
     }[year] || "#444";
 }
 
+/* TRENCHLINES */
 var trenchLayer = L.geoJSON(trenchlines, {
     style: function(feature) {
         return {
@@ -300,28 +289,23 @@ L.control.layers(null, {
 
 
 
+/* LEGEND */
 var legend = L.control({ position: "topleft" });
 
 legend.onAdd = function () {
     var div = L.DomUtil.create("div", "legend");
 
     div.innerHTML = `
-        <h4>Legend</h4>
+        <h4>Map Key</h4>
         <div><span class="line y1914"></span> 1914 Front</div>
         <div><span class="line y1915"></span> 1915 Front</div>
         <div><span class="line y1916"></span> 1916 Front</div>
         <div><span class="line y1917"></span> 1917 Front</div>
         <div><span class="line y1918"></span> 1918 Front</div>
-        <hr>
-        <div><span class="line border1914"></span> 1914 Borders</div>
-        <div><span class="line border1918"></span> 1918 Borders</div>
-        <hr>
-        <div class="label allies">■ Allies</div>
-        <div class="label central">■ Central Powers</div>
-        <hr>
+
         <div>
-        <img src="https://webstockreview.net/images/battle-clipart-sword-fight-26.png" class="legend-icon">
-        Major Battle
+          <img src="https://webstockreview.net/images/battle-clipart-sword-fight-26.png" class="legend-icon">
+          Major Battle
         </div>
         <hr>
         <div><span class="line dashed"></span> National Borders</div>
@@ -331,6 +315,7 @@ legend.onAdd = function () {
 
 legend.addTo(map);
 
+/* ICON */
 var battleIcon = L.icon({
     iconUrl: "https://webstockreview.net/images/battle-clipart-sword-fight-26.png",
     iconSize: [20, 20],
@@ -338,6 +323,7 @@ var battleIcon = L.icon({
     popupAnchor: [0, -32]
 });
 
+/* FULL BATTLES */
 var battles = [
     {
         name: "First Battle of the Marne (Sep 6 – 12, 1914)",
@@ -351,7 +337,7 @@ var battles = [
         coords: [40.2, 26.4],
         year: 1915,
         summary: "Allied forces failed to capture the Dardanelles, resulting in heavy casualties. Around 1 million combatants with ~130,000 dead.",
-        img: "https://d.ibtimes.co.uk/en/full/1435452/gallipoli-then-now-1915-2015.jpg"
+        img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2152323821/settings_images/sdHq75v8R2CXxgVWqzvn_TheBattleofgallipolicampaign.jpg"
     },
     {
         name: "Second Battle of Ypres (Apr 22 – May 25, 1915)",
@@ -365,14 +351,14 @@ var battles = [
         coords: [49.20, 5.43],
         year: 1916,
         summary: "One of the longest and bloodiest battles. Around 2 million combatants with ~300,000 dead.",
-        img: "https://allthatsinteresting.com/wordpress/wp-content/uploads/2015/08/historic-battlefields-verdun-craters.jpg"
+        img: "https://i3.ytimg.com/vi/WpmuGIWkRUc/maxresdefault.jpg"
     },
     {
         name: "Battle of the Somme (Jul 1 – Nov 18, 1916)",
         coords: [50.02, 2.65],
         year: 1916,
         summary: "Over one million casualties. Around 3 million combatants with ~300,000 dead.",
-        img: "https://battlefields.ca/wp-content/uploads/2014/08/somme_cover.jpg"
+        img: "https://cdn.britannica.com/57/135157-050-F09D61E4/French-soldier-trench-Somme-World-War-I.jpg"
     },
     {
         name: "Battle of Jutland (May 31 – Jun 1, 1916)",
@@ -400,73 +386,74 @@ var battles = [
         coords: [50.8641, 2.8956],
         year: 1914,
         summary: "Marked the end of mobile warfare and the beginning of trench stalemate on the Western Front. Around 1 million combatants with ~200,000 dead.",
-        img: "https://as1.ftcdn.net/v2/jpg/00/60/16/70/1000_F_60167044_uiuPoKlviTK5Rq69XsME0p17GfUjy5rj.jpg"
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/59/Ypres_1914_map.png"
     },
     {
         name: "Battle of Neuve Chapelle (Mar 10 – Mar 13, 1915)",
         coords: [50.57, 2.78],
         year: 1915,
         summary: "A British offensive that achieved early success but failed to sustain a breakthrough. Around 80,000 combatants with ~11,000 dead.",
-        img: "https://www.longlongtrail.co.uk/wp-content/uploads/2015/08/Q90276.jpg"
+        img: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Neuve_Chapelle_map.png"
     },
     {
         name: "Battle of Loos (Sep 25 – Oct 8, 1915)",
         coords: [50.45, 2.78],
         year: 1915,
         summary: "Largest British attack of 1915 and first use of poison gas by British forces. Around 300,000 combatants with ~50,000 dead.",
-        img: "https://th.bing.com/th/id/R.9df430857f80a01b5319fcb8b8344cfd?rik=Q2MnicAf6aAQ6A&riu=http%3a%2f%2fwww.longlongtrail.co.uk%2fPIX%2floos_typical.jpg&ehk=njYlUqfNeQ2b5EehRTL8A4653ssjc%2bnFrBP0ZHEqWFY%3d&risl=&pid=ImgRaw&r=0"
+        img: "https://upload.wikimedia.org/wikipedia/commons/6/63/Battle_of_Loos_map.png"
     },
     {
         name: "Battle of Vimy Ridge (Apr 9 – Apr 12, 1917)",
         coords: [50.38, 2.77],
         year: 1917,
         summary: "A major Canadian victory capturing a strategic ridge from German forces. Around 150,000 combatants with ~10,000 dead.",
-        img: "https://tse3.mm.bing.net/th/id/OIP.8NEJJ1yrbzYVXk2VzOL38wHaER?rs=1&pid=ImgDetMain&o=7&rm=3"
+        img: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Vimy_Ridge_map.png"
     },
     {
         name: "Nivelle Offensive (Apr 16 – May 9, 1917)",
         coords: [49.4, 3.4],
         year: 1917,
         summary: "A failed French offensive that led to widespread mutinies in the French army. Around 1.2 million combatants with ~187,000 dead.",
-        img: "https://th.bing.com/th/id/R.fbc8a4c63ce52f5474601d047b5a55af?rik=ryxyY6GdvKYOUw&pid=ImgRaw&r=0"
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Nivelle_Offensive_map.png"
     },
     {
         name: "Battle of Messines (Jun 7 – Jun 14, 1917)",
         coords: [50.75, 2.9],
         year: 1917,
         summary: "British forces detonated massive underground mines, devastating German positions. Around 200,000 combatants with ~25,000 dead.",
-        img: "https://www.warhistoryonline.com/wp-content/uploads/sites/64/2023/02/battle-of-messines-fb-image-69670.png"
+        img: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Battle_of_Messines_map.png"
     },
     {
         name: "Battle of Cambrai (Nov 20 – Dec 7, 1917)",
         coords: [50.18, 3.23],
         year: 1917,
         summary: "First large-scale use of tanks by British forces, achieving initial success before a German counterattack. Around 300,000 combatants with ~45,000 dead.",
-        img: "https://th.bing.com/th/id/R.73d537beca0cf4bf71679e6fd5e2460e?rik=cHhq%2b18XbZFLjw&pid=ImgRaw&r=0"
+        img: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Battle_of_Cambrai_map.png"
     },
     {
         name: "Operation Michael (Mar 21 – Apr 5, 1918)",
         coords: [49.9, 2.8],
         year: 1918,
         summary: "The largest German Spring Offensive aimed at breaking Allied lines before American forces arrived. Around 3 million combatants with ~240,000 dead.",
-        img: "https://i.redd.it/jgtztmdhxqm01.png"
+        img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Operation_Michael_map.png"
     },
     {
         name: "Battle of Amiens (Aug 8 – Aug 12, 1918)",
         coords: [49.9, 2.3],
         year: 1918,
         summary: "A decisive Allied victory marking the beginning of the Hundred Days Offensive. Around 500,000 combatants with ~30,000 dead.",
-        img: "https://warfarehistorynetwork.com/wp-content/uploads/2015/11/M-Amiens-4-HT-Aug01-2048x1486.jpg"
+        img: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Battle_of_Amiens_map.png"
     },
     {
         name: "Meuse-Argonne Offensive (Sep 26 – Nov 11, 1918)",
         coords: [49.2, 5.0],
         year: 1918,
         summary: "The largest American operation of the war, contributing significantly to the final Allied victory. Around 1.2 million combatants with ~117,000 dead.",
-        img: "https://media.defense.gov/2021/Nov/16/2002894085/1088/820/0/180901-O-D0439-001C.JPG"
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Meuse-Argonne_map.png"
     },
 ];
 
+/* DISPLAY ALL BATTLES */
 var battleLayer = L.layerGroup().addTo(map);
 
 battles.forEach(function(b) {
@@ -481,6 +468,7 @@ battles.forEach(function(b) {
 });
 </script>
 
+<!-- SURVIVABILITY SIMULATOR UNCHANGED -->
 <div class="container">
   <h1>WWI Survivability Simulator</h1>
   <p>Select battles and calculate the probability of surviving all of them.</p>
